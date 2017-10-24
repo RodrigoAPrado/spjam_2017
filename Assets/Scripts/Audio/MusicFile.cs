@@ -12,7 +12,7 @@ public class MusicFile : AudioFile {
                     float loopEnd = 0, 
                     float baseSpeed = 1)
     {
-        this.audio = Resources.Load(musicPath) as AudioClip;
+        this.audio = Resources.Load<AudioClip>(musicPath);
         this.baseVolume = baseVolume;
         this.loopStart = loopStart;
         this.loopEnd = loopEnd;
