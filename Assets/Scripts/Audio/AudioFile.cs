@@ -14,7 +14,7 @@ public class AudioFile {
 
     public AudioFile(string audioPath, float baseVolume = 1, float baseSpeed = 1)
     {
-        this.audio = Resources.Load(audioPath) as AudioClip;
+        this.audio = Resources.Load<AudioClip>(audioPath);
         this.baseVolume = baseVolume;
         this.baseSpeed = baseSpeed;
     }

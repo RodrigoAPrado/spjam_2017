@@ -17,19 +17,17 @@ public class MusicPlayer : MonoBehaviour {
 
         musicController = new MusicController();
 
-        defaultMusic = new MusicFile("MINHAROLA\\Hip.mp3");
+        defaultMusic = new MusicFile("MINHAROLA/Hip");
 
         currentMusic = defaultMusic;
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
-        if(audioSource != null)
-        {
-            startMusic();
-        }else
+        if(audioSource == null)
         {
             throw new System.Exception("Game object does not have an Audio Source. Cannot play music");
         }
+        startMusic();
     }
 	
 	// Update is called once per frame
@@ -40,10 +38,6 @@ public class MusicPlayer : MonoBehaviour {
             {
                 audioSource.time = currentMusic.getLoopStart();
             }
-        }
-        if (!audioSource.isPlaying)
-        {
-            audioSource.Play();
         }
     }
 
