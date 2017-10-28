@@ -5,6 +5,7 @@ public class ButtonController : MonoBehaviour {
 
     private Button[] menuButtons;
     private int currentButton;
+    [SerializeField]private bool blockSideWay;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +16,13 @@ public class ButtonController : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("Up") || Input.GetButtonDown("Left"))
+        if (Input.GetButtonDown("Up") || (Input.GetButtonDown("Left") && !blockSideWay))
         {
             menuButtons[currentButton].switchSelected();
             changeButtonUp();
             menuButtons[currentButton].switchSelected();
         }
-        else if (Input.GetButtonDown("Down") || Input.GetButtonDown("Right"))
+        else if (Input.GetButtonDown("Down") || (Input.GetButtonDown("Right") && !blockSideWay))
         {
             menuButtons[currentButton].switchSelected();
             changeButtonDown();
