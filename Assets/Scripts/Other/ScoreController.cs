@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreController : MonoBehaviour {
+public class ScoreController : GameController {
 
     [SerializeField]
     private TextMesh blackText;
@@ -20,11 +20,11 @@ public class ScoreController : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            updateScore();
+            execute("ok");
         }
     }
 
-    public void updateScore()
+    public override void execute(string test)
     {
         score = score + 1;
 

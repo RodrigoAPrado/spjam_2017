@@ -2,19 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class PlayerDamageController : MonoBehaviour {
-
-    private PlayerHealthController playerHealthController;
-
-    private PlayerSpriteDamageController playerDamageSpriteController;
-
-    private GameRuntimeController gameRuntimeController;
-
-    [SerializeField]
-    private Transform damageCollider;
-
-    [SerializeField]
-    private LayerMask enemyLayerMask;
+public class PlayerDamageController : CharacterDamageController {
 
     [SerializeField]
     private string character;
@@ -22,18 +10,12 @@ public class PlayerDamageController : MonoBehaviour {
     [SerializeField]
     private bool debug;
 
-    private float damageCooldown;
-
-    private float startDamageCooldown = 1.5f;
-
-    private float damageHitBox = 0.6f;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         damageCooldown = 0;
-        playerHealthController = gameObject.GetComponent<PlayerHealthController>();
-        playerDamageSpriteController = gameObject.GetComponent<PlayerSpriteDamageController>();
-        gameRuntimeController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameRuntimeController>();
+        characterHealthController = gameObject.GetComponent<PlayerHealthController>();
+        characterDamageSpriteController = gameObject.GetComponent<PlayerSpriteDamageController>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameRuntimeController>();
     }
 
     void Update()
@@ -43,10 +25,10 @@ public class PlayerDamageController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
-                healthPoints = playerHealthController.reduceHealthPoints(20);
+                healthPoints = characterHealthController.reduceHealthPoints(20);
                 damageCooldown = startDamageCooldown;
                 if (healthPoints <= 0)
-                    gameRuntimeController.execute(character + "Dead");
+                    gameController.execute(character + "Dead");
             }
         }
         if(damageCooldown > 0)
@@ -56,30 +38,21 @@ public class PlayerDamageController : MonoBehaviour {
         else
         {
             if (checkDamageAndDead())
-                gameRuntimeController.execute(character+"Dead");
+                gameController.execute(character+"Dead");
 
                 
         }
     }
 
-    private void controlCooldown()
-    {
-        damageCooldown -= Time.deltaTime;
-        playerDamageSpriteController.flicker();
-        if(damageCooldown <= 0)
-        {
-            playerDamageSpriteController.halt();
-        }
-    }
-
     //Check if player should take damage and returns if player is dead or not after damage.
-    private bool checkDamageAndDead()
+    protected override bool checkDamageAndDead()
     {
         int healthPoints = 1;
-        Collider2D enemyHit = Physics2D.OverlapCircle(damageCollider.position, damageHitBox, enemyLayerMask);
+        Collider2D enemyHit = Physics2D.OverlapCircle(damageCollider.position, damageHitBox, damageLayerMask);
         if (enemyHit != null)
         {
             damageCooldown = startDamageCooldown;
+            Debug.Log("ok");
             //Implement getting enemyDamageValue
             //healthPoints = playerHealthController.reduceHealthPoints(enemyHit.gameObject.GetComponent<>);
         }
