@@ -24,7 +24,7 @@ public class PlayerDamageController : MonoBehaviour {
 
     private float damageCooldown;
 
-    private float startDamageCooldown;
+    private float startDamageCooldown = 1.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +42,9 @@ public class PlayerDamageController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.K))
             {
                 healthPoints = playerHealthController.reduceHealthPoints(20);
-                Debug.Log(character+"/"+healthPoints);
+                damageCooldown = startDamageCooldown;
+                if (healthPoints <= 0)
+                    gameRuntimeController.execute(character + "Dead");
             }
         }
         if(damageCooldown > 0)

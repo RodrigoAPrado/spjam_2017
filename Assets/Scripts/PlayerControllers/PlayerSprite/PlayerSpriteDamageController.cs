@@ -10,38 +10,43 @@ public class PlayerSpriteDamageController : MonoBehaviour {
 
     private bool toAlpha;
 
-    private float flickerRate;
+    private float flickerRate = 20;
 
     void Start()
     {
-        alpha = 1;
-
-        toAlpha = true;
+        initialize();
     }
 
 	public void flicker()
     {
         if (toAlpha)
         {
+            alpha -= flickerRate * Time.deltaTime;
             if (alpha <= 0)
                 toAlpha = false;
         }
         else
         {
-            if (alpha >= 1)
+
+            alpha += flickerRate * Time.deltaTime;
+            if (alpha >= 0.5f)
                 toAlpha = true;
         }
+
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
     }
 
     public void halt()
     {
-
+        initialize();
     }
 
-    public void initialize()
+    private void initialize()
     {
         alpha = 1;
 
         toAlpha = true;
+
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 }
