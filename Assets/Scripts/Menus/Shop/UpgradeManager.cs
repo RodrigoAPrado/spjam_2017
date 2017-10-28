@@ -22,7 +22,7 @@ public class UpgradeManager : MonoBehaviour {
 
         price = basePrice * (rank + 1) * (rank + 1);
 
-        ButtonSpriteController buttonSpriteController = GetComponent<ButtonSpriteController>();
+        IButtonSpriteController buttonSpriteController = GetComponent<IButtonSpriteController>();
 
         buttonSpriteController.setButtonSpriteName(buttonSpriteController.getButtonSpriteName() + "_" + rank.ToString());
     }

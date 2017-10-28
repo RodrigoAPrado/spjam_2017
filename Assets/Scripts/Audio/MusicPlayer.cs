@@ -56,7 +56,7 @@ public class MusicPlayer : AudioPlayer {
     public void setMusic(MusicFile musicToPlay)
     {
         if (currentMusic == null || musicToPlay.getAudio() != currentMusic.getAudio())
-        { 
+        {
             currentMusic = musicToPlay;
             startMusic();
         }

@@ -12,7 +12,7 @@ public class ButtonConfirm : ButtonChangePage {
         gameController = GameObject.FindGameObjectWithTag("GameController").
                                         GetComponent<GameController>();
 
-        sceneToLoad = "Game";
+        sceneToLoad = "NewGame";
         command = "";
     }
 

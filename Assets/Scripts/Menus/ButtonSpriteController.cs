@@ -1,19 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonSpriteController : MonoBehaviour {
-
-    [SerializeField]
-    private string buttonSpriteName;
-    private Sprite buttonSprite;
-    private SpriteRenderer spriteRenderer;
-    private Button buttonController;
+public class ButtonSpriteController : IButtonSpriteController {
 
 	// Use this for initialization
 	void Start () {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        buttonSprite = Resources.Load<Sprite>("Sprites/Title_Screen/" + buttonSpriteName + "_sprite");
+        buttonSprite = Resources.Load<Sprite>("Sprites/TitleScreen/" + buttonSpriteName + "_sprite");
 
         if(buttonSprite != null) spriteRenderer.sprite = buttonSprite;
 
@@ -42,13 +36,20 @@ public class ButtonSpriteController : MonoBehaviour {
         }
     }
 
-    public void setButtonSpriteName(string name)
+    public override void setButtonSpriteName(string name)
     {
         buttonSpriteName = name;
+        changeSprite();
     }
 
-    public string getButtonSpriteName()
+    public override string getButtonSpriteName()
     {
         return buttonSpriteName;
+    }
+
+    protected override void changeSprite()
+    {
+        buttonSprite = Resources.Load<Sprite>("Sprites/TitleScreen/" + buttonSpriteName + "_sprite");
+        if (buttonSprite != null) spriteRenderer.sprite = buttonSprite;
     }
 }

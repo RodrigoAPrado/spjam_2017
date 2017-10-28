@@ -6,7 +6,7 @@ public class ButtonNewGame : ButtonChangePage {
 
     void Start()
     {
-        sceneToLoad = "Game";
+        sceneToLoad = "NewGame";
         if (PlayerPrefs.HasKey("hasSaveFile"))
         {
             sceneToLoad = "ConfirmNewGame";
