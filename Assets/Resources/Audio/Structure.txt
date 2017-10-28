@@ -1,0 +1,80 @@
+Inimigos
+- Porco-espinho
+	- Idle
+	- Trigger
+	- Explode
+- Rato genérico
+	- Run
+	- Die
+- Marmota
+	- Hide
+	- Rise
+	- Aiming
+	- Shoot
+	- Die
+- Esquilo voador
+	- Fly
+	- Drop Bomb
+	- Die
+- Pombo correio
+	- Idle
+	- Drop
+	- Burn
+
+- Stone (fall)
+
+Animações
+- Run
+- Take Damage
+- Die
+- Jump
+- Shoot
+- Warp Gun
+- Swap
+- Secretão
+	- Stop time + Slash
+	- Fala Especial
+- Fala + troca de fala
+
+Upgrades - 5 de cada
+- Tabi
+- HP Regen
+- Frequency
+- HP
+- Secretão
+- Less Cooldown
+
+Boss
+- Estado 1: Incapacitar lanes
+	- Jonas: Atirar na lane
+		Prepara
+		Arremessa
+	- RAT: Solta lasers
+		Atira
+		Troca
+
+- Estado 2: Criar buracos e pedras
+	- Jonas: Joga bombas
+		Pegar pedra
+		Jogar
+	- RAT: Solta lasers
+		Preparação
+		Teleporta
+
+- Estado 3: Morte
+	- Jonas: Die
+	- RAT: Die
+
+- Telas
+	- Menus (clique)
+	- Trocar opção
+	- Loja (comprar)
+
+- Músicas
+	- Menu
+	- Main Theme
+	- Boss
+	- Shop
+	- Victory
+	- Game Over
+	- Samurai Club
