@@ -66,10 +66,10 @@ public class PlayerStateController : MonoBehaviour {
                 changeStateToWarp();
                 break;
             case "laneUp":
-                changeStateToSwap(1);
+                confirmStateToSwap(1);
                 break;
             case "laneDown":
-                changeStateToSwap(-1);
+                confirmStateToSwap(-1);
                 break;
             default:
                 break;
@@ -144,17 +144,22 @@ public class PlayerStateController : MonoBehaviour {
         }
     }
 
-    private void changeStateToSwap(int lane)
+    private void confirmStateToSwap(int lane)
     {
         switch (currentState)
         {
             case StateMachine.normal:
-                changeCurrentState(StateMachine.swap);
+                playerSwapController.checkAndSwapIfPossible(lane);
                 break;
             case StateMachine.shooting:
-                changeCurrentState(StateMachine.swap);
+                playerSwapController.checkAndSwapIfPossible(lane);
                 break;
         }
+    }
+
+    public void changeStateToSwap()
+    {
+        changeCurrentState(StateMachine.swap);
     }
 
     public StateMachine getCurrentState()

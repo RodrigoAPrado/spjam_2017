@@ -26,6 +26,8 @@ public class PlayerDamageController : MonoBehaviour {
 
     private float startDamageCooldown = 1.5f;
 
+    private float damageHitBox = 0.6f;
+
 	// Use this for initialization
 	void Start () {
         damageCooldown = 0;
@@ -74,7 +76,7 @@ public class PlayerDamageController : MonoBehaviour {
     private bool checkDamageAndDead()
     {
         int healthPoints = 1;
-        Collider2D enemyHit = Physics2D.OverlapCircle(damageCollider.position, 2f, enemyLayerMask);
+        Collider2D enemyHit = Physics2D.OverlapCircle(damageCollider.position, damageHitBox, enemyLayerMask);
         if (enemyHit != null)
         {
             damageCooldown = startDamageCooldown;

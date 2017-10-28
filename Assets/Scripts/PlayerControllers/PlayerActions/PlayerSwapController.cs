@@ -4,8 +4,13 @@ using System.Collections;
 public class PlayerSwapController : PlayerActionController
 {
 
+    PlayerLaneController playerLaneController;
+
+    private int lastLaneValue;
+
     void Start()
     {
+        playerLaneController = gameObject.GetComponent<PlayerLaneController>();
         actionTimerEnd = 1;
     }
 
@@ -17,6 +22,7 @@ public class PlayerSwapController : PlayerActionController
 
     protected override void setFinishAction()
     {
+        finishAction += this.changePlayerLane;
         finishAction += playerStateController.finishSwap;
     }
 
@@ -27,5 +33,19 @@ public class PlayerSwapController : PlayerActionController
             return true;
         else
             return false;
+    }
+
+    public void checkAndSwapIfPossible(int value)
+    {
+        if (playerLaneController.checkLane(value))
+        {
+            lastLaneValue = value;
+            playerStateController.changeStateToSwap();
+        }
+    }
+
+    private void changePlayerLane()
+    {
+        playerLaneController.switchLane(lastLaneValue);
     }
 }
