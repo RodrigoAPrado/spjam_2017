@@ -15,13 +15,13 @@ public class ButtonController : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("Up"))
+        if (Input.GetButtonDown("Up") || Input.GetButtonDown("Left"))
         {
             menuButtons[currentButton].switchSelected();
             changeButtonUp();
             menuButtons[currentButton].switchSelected();
         }
-        else if (Input.GetButtonDown("Down"))
+        else if (Input.GetButtonDown("Down") || Input.GetButtonDown("Right"))
         {
             menuButtons[currentButton].switchSelected();
             changeButtonDown();

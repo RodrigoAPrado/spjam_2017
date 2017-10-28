@@ -8,22 +8,40 @@ public class SfxPlayer : AudioPlayer {
 
     void Start()
     {
-        defaultSfx = new AudioFile("");
-    }
+        volumeController = new VolumeController("sfx");
 
-    public override void updateVolume()
-    {
-        audioSource.PlayOneShot(defaultSfx);
-    }
+        defaultSfx = new AudioFile("Audio/test");
 
+        audioSource = gameObject.GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            throw new System.Exception("Game object does not have an Audio Source. Cannot play sound effect");
+        }
+    }
+    
     public override void volumeChangeVolume(int value)
     {
-        throw new NotImplementedException();
+        volumeController.changeVolume(value);
+        updateVolume();
     }
 
     public override void volumeSwitchMute()
     {
-        throw new NotImplementedException();
+        volumeController.switchMute();
+        updateVolume();
+    }
+
+    public override void updateVolume()
+    {
+        playSoundEffect(defaultSfx);
+    }
+
+    public void playSoundEffect(AudioFile audio)
+    {
+        audioSource.volume = defaultSfx.getVolume() * PlayerPrefs.GetFloat("sfxVolume");
+        audioSource.mute = PlayerPrefs.GetInt("sfxMute") == 0 ? false : true;
+        audioSource.PlayOneShot(defaultSfx.getAudio());
     }
 
 }

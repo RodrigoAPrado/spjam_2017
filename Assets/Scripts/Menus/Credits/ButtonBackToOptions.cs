@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonBackToOptions : ButtonBackToMainMenu {
+public class ButtonBackToOptions : ButtonBack {
 
 	void Start ()
     {

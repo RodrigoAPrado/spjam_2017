@@ -41,4 +41,14 @@ public class ButtonSpriteController : MonoBehaviour {
             }
         }
     }
+
+    public void setButtonSpriteName(string name)
+    {
+        buttonSpriteName = name;
+    }
+
+    public string getButtonSpriteName()
+    {
+        return buttonSpriteName;
+    }
 }

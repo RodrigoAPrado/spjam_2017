@@ -13,7 +13,7 @@ public class MusicPlayer : AudioPlayer {
 
         volumeController = new VolumeController("music");
 
-        defaultMusic = new MusicFile("MINHAROLA/Hip");
+        defaultMusic = new MusicFile("Audio/Musics/Hip");
 
         audioSource = gameObject.GetComponent<AudioSource>();
 

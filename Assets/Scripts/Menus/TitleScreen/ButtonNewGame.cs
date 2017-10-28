@@ -9,7 +9,7 @@ public class ButtonNewGame : ButtonChangePage {
         sceneToLoad = "Game";
         if (PlayerPrefs.HasKey("hasSaveFile"))
         {
-            sceneToLoad = "confirmNewGame";
+            sceneToLoad = "ConfirmNewGame";
         }
     }
 
