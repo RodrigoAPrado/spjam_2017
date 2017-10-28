@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MusicPlayer : MonoBehaviour {
+public class MusicPlayer : AudioPlayer {
     
     private MusicFile defaultMusic;
     
     private MusicFile currentMusic;
 
-    private MusicController musicController;
-
-    private AudioSource audioSource;
-
     // Use this for initialization
     void Start () {
         Object.DontDestroyOnLoad(this.gameObject);
 
-        musicController = new MusicController();
+        volumeController = new VolumeController("music");
 
         defaultMusic = new MusicFile("MINHAROLA/Hip");
-
-        currentMusic = defaultMusic;
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
@@ -27,7 +21,8 @@ public class MusicPlayer : MonoBehaviour {
         {
             throw new System.Exception("Game object does not have an Audio Source. Cannot play music");
         }
-        startMusic();
+
+        setMusic(defaultMusic);
     }
 	
 	// Update is called once per frame
@@ -41,7 +36,33 @@ public class MusicPlayer : MonoBehaviour {
         }
     }
 
-    void startMusic()
+    public override void volumeChangeVolume(int value)
+    {
+        volumeController.changeVolume(value);
+        updateVolume();
+    }
+
+    public override void volumeSwitchMute()
+    {
+        volumeController.switchMute();
+        updateVolume();
+    }
+
+    public override void updateVolume()
+    {
+        musicSettings();
+    }
+
+    public void setMusic(MusicFile musicToPlay)
+    {
+        if (currentMusic == null || musicToPlay.getAudio() != currentMusic.getAudio())
+        { 
+            currentMusic = musicToPlay;
+            startMusic();
+        }
+    }
+
+    private void startMusic()
     {
         if(currentMusic == null)
         {
@@ -57,10 +78,15 @@ public class MusicPlayer : MonoBehaviour {
         
     }
 
-    void musicSettings()
+    private void musicSettings()
     {
-        audioSource.volume = musicController.getVolume() * currentMusic.getVolume();
-        audioSource.mute = musicController.getMute();
+        audioSource.volume = PlayerPrefs.GetFloat("musicVolume") * currentMusic.getVolume();
+        audioSource.mute = PlayerPrefs.GetInt("musicMute") == 0? false : true;
+    }
+
+    public void resetToDefault()
+    {
+        setMusic(defaultMusic);
     }
     
 }
