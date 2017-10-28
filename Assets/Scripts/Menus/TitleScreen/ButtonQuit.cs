@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KeyboardButtonQuit : KeyboardButton {
-    [SerializeField]
+public class ButtonQuit : Button {
 
     public override void doAction()
     {

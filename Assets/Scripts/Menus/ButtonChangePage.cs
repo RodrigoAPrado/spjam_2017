@@ -2,10 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class KeyboardButtonChangePage : KeyboardButton {
+public class ButtonChangePage : Button {
 
-    [SerializeField]
-    private string sceneToLoad;
+    protected string sceneToLoad;
 
     public override void doAction()
     {
