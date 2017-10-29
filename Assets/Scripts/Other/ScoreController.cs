@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ScoreController : GameController {
 
@@ -26,7 +27,7 @@ public class ScoreController : GameController {
 
     public override void execute(string test)
     {
-        score = score + 1;
+        score = score + Int32.Parse(test);
 
         scoreText = setScoreText();
         blackText.text = scoreText;

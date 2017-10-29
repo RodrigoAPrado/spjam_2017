@@ -13,9 +13,6 @@ public class EnemySpawnerController : MonoBehaviour {
     [SerializeField]
     private GameObject[] pastEnemies;
 
-    [SerializeField]
-    private float[] ratio;
-
     private int enemiesInFuture;
     private int enemiesInPresent;
     private int enemiesFromFuture;
@@ -30,8 +27,14 @@ public class EnemySpawnerController : MonoBehaviour {
     private float spawnTimerMax = 6;
 
     private float spawnTimer;
-
+    
     private int scoreCheck = 5;
+
+    private int enemyRatRatio = 4;
+
+    private int enemyMarmotRatio = 1;
+
+    private int enemySquirrelRatio = 1;
 
     // Use this for initialization
     void Start () {
@@ -67,10 +70,10 @@ public class EnemySpawnerController : MonoBehaviour {
     {
         string world = getSummonWorld();
         string dimension = getSummonEnemyDimension();
-        //getSummonEnemyType();
+        int type = getSummonEnemyType();
         int location = getSummonLocation();
 
-        summonAnEnemy(world, dimension, location);
+        summonAnEnemy(world, dimension, location, type);
     }
 
     private void checkSpawnTimerMax()
@@ -144,6 +147,19 @@ public class EnemySpawnerController : MonoBehaviour {
         return result;
     }
 
+    private int getSummonEnemyType()
+    {
+        int result = 0;
+        int totalRatio = enemyMarmotRatio + enemyRatRatio;
+        int rng = Random.Range(1, totalRatio+1);
+        if(rng <= enemyMarmotRatio)
+        {
+            result = 1;
+        }
+
+        return result;
+    }
+
     private int getSummonLocation()
     {
 
@@ -185,7 +201,7 @@ public class EnemySpawnerController : MonoBehaviour {
         return result;
     }
 
-    private void summonAnEnemy(string world, string dimension, int location)
+    private void summonAnEnemy(string world, string dimension, int location, int type)
     {
         GameObject worldToSummon = null;
         switch (world)
@@ -216,7 +232,7 @@ public class EnemySpawnerController : MonoBehaviour {
 
         Vector2 spawnPosition = new Vector2(10, laneController.getLanePositionStart(location));
 
-        GameObject enemy = GameObject.Instantiate(enemyRoster[0], spawnPosition, enemyRoster[0].transform.rotation) as GameObject;
+        GameObject enemy = GameObject.Instantiate(enemyRoster[type], spawnPosition, enemyRoster[type].transform.rotation) as GameObject;
 
         enemy.GetComponent<EnemyBaseController>().setLane(location);
 

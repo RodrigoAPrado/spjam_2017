@@ -3,9 +3,9 @@ using System.Collections;
 
 public class EnemyBaseController : MonoBehaviour {
 
-    private int currentLane;
+    protected int currentLane;
 
-    private LaneController laneController;
+    protected LaneController laneController;
 
     void Start()
     {

@@ -9,6 +9,8 @@ public class CharacterDamageController : MonoBehaviour {
 
     protected GameController gameController;
 
+    protected string value = "";
+
     [SerializeField]
     protected Transform damageCollider;
 
@@ -42,7 +44,7 @@ public class CharacterDamageController : MonoBehaviour {
         {
             if (checkDamageAndDead())
             {
-                gameController.execute("ok");
+                gameController.execute(value);
                 GameObject.Destroy(gameObject);
             }
         }
