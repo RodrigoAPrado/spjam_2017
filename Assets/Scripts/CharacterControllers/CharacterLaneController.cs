@@ -44,7 +44,7 @@ public class CharacterLaneController : MonoBehaviour {
 
 
         float height = laneController.getLanePositionStart(currentLane + laneModifier);
-        Vector2 targetLane = new Vector2(-8.1f, height);
+        Vector2 targetLane = new Vector2(-7, height);
 
         laneMovementController.setTarget(targetLane);
         laneMovementController.finishMovement();

@@ -69,7 +69,6 @@ public class CharacterDamageController : MonoBehaviour {
         {
             damageCooldown = startDamageCooldown;
             healthPoints = takeDamage(enemyHit.gameObject);
-
         }
         if (healthPoints <= 0)
             return true;

@@ -63,4 +63,14 @@ public class PlayerHealthController : CharacterHealthController
         }
     }
 
+    public int getMaxHealth()
+    {
+        return maxHealthPoints;
+    }
+
+    public int getCurrentHealth()
+    {
+        return healthPoints;
+    }
+
 }

@@ -1,26 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawnerController : MonoBehaviour {
-    
-    private LaneController laneController;
-    private GameObject presentWorld;
-    private GameObject futureWorld;
+public class EnemySpawnerController : SpawnerController {
 
     [SerializeField]
     private GameObject[] futureEnemies;
 
     [SerializeField]
     private GameObject[] pastEnemies;
-
-    private int enemiesInFuture;
-    private int enemiesInPresent;
+    
     private int enemiesFromFuture;
     private int enemiesFromPresent;
-    private int enemiesInTopLane;
-    private int enemiesInMidLane;
-    private int enemiesInBotLane;
-
 
     private ScoreController scoreController;
 
@@ -38,13 +28,13 @@ public class EnemySpawnerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        enemiesInFuture = 0;
-        enemiesInPresent = 0;
+        timesSpawnedInFuture = 0;
+        timesSpawnedInPresent = 0;
         enemiesFromFuture = 0;
         enemiesFromPresent = 0;
-        enemiesInTopLane = 10;
-        enemiesInMidLane = 10;
-        enemiesInBotLane = 10;
+        spawnInTopLane = 10;
+        spawnInMidLane = 10;
+        spawnInBotLane = 10;
         spawnTimer = spawnTimerMax;
         laneController = GameObject.FindGameObjectWithTag("LaneController").GetComponent<LaneController>();
         scoreController = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>();
@@ -94,33 +84,6 @@ public class EnemySpawnerController : MonoBehaviour {
         }
     }
 
-    private string getSummonWorld()
-    {
-
-        string result =  "";
-
-        int chanceToSpawnInFuture = enemiesInPresent + 1;
-
-        int chanceToSpawnInPresent = enemiesInFuture + 1;
-
-        int totalChance = chanceToSpawnInFuture + chanceToSpawnInPresent;
-
-        int rng = Random.Range(1, totalChance + 1);
-
-        if(rng <= chanceToSpawnInPresent)
-        {
-            result = "present";
-            enemiesInPresent = enemiesInPresent + 1;
-        }
-        else
-        {
-            result = "future";
-            enemiesInFuture = enemiesInFuture + 1;
-        }
-
-        return result;
-    }
-
     private string getSummonEnemyDimension()
     {
         string result = "";
@@ -160,46 +123,7 @@ public class EnemySpawnerController : MonoBehaviour {
         return result;
     }
 
-    private int getSummonLocation()
-    {
-
-        int result = 3;
-
-        int totalValue = enemiesInBotLane + enemiesInMidLane + enemiesInTopLane;
-
-        if(totalValue == 0)
-        {
-            enemiesInTopLane = 10;
-            enemiesInMidLane = 10;
-            enemiesInBotLane = 10;
-            result = getSummonLocation();
-        }
-
-        if (totalValue > 0)
-        {
-
-            int rng = Random.Range(1, totalValue + 1);
-
-            if (rng <= enemiesInBotLane)
-            {
-                result = 0;
-                enemiesInBotLane = enemiesInBotLane - 1;
-            }
-            else if (rng <= enemiesInBotLane + enemiesInMidLane)
-            {
-                result = 1;
-                enemiesInMidLane = enemiesInMidLane - 1;
-            }
-            else
-            {
-                result = 2;
-                enemiesInTopLane = enemiesInTopLane - 1;
-            }
-
-        }
-
-        return result;
-    }
+    
 
     private void summonAnEnemy(string world, string dimension, int location, int type)
     {
