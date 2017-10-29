@@ -13,7 +13,7 @@ public class MusicPlayer : AudioPlayer {
 
         volumeController = new VolumeController("music");
 
-        defaultMusic = new MusicFile("Audio/Musics/Hip");
+        defaultMusic = new MusicFile("Audio/Musics/MainScreenTheme", 1, 0, 38.40f);
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
@@ -72,6 +72,8 @@ public class MusicPlayer : AudioPlayer {
         {
             audioSource.Stop();
         }
+
+        audioSource.time = 0;
         audioSource.clip = currentMusic.getAudio();
         musicSettings();
         audioSource.Play();

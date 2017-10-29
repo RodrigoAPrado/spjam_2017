@@ -1,0 +1,6 @@
+MainScreenTheme: 0s, 38.40s
+Dead: 0s, 22s
+Game Theme: 09.60s, 2min43s.20
+Shop: 07s.66, 38s.29
+Boss: 13s.71, 1min36s
+Victory: N loopa

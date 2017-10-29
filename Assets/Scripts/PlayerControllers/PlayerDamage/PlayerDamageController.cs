@@ -45,22 +45,16 @@ public class PlayerDamageController : CharacterDamageController {
         }
     }
 
-    //Check if player should take damage and returns if player is dead or not after damage.
-    protected override bool checkDamageAndDead()
+    protected override int takeDamage(GameObject enemy)
     {
-        int healthPoints = 1;
-        Collider2D enemyHit = Physics2D.OverlapCircle(damageCollider.position, damageHitBox, damageLayerMask);
-        if (enemyHit != null)
-        {
-            damageCooldown = startDamageCooldown;
-            Debug.Log("ok");
-            //Implement getting enemyDamageValue
-            //healthPoints = playerHealthController.reduceHealthPoints(enemyHit.gameObject.GetComponent<>);
-        }
-        if (healthPoints <= 0)
-            return true;
-        else
-            return false;
 
+        int damage = enemy.GetComponent<DamageDeallerController>().getDamage();
+
+        SelfDestructOnContact selfDestruct = enemy.GetComponent<SelfDestructOnContact>();
+
+        if (selfDestruct != null)
+            selfDestruct.destroySelf();
+
+        return characterHealthController.reduceHealthPoints(damage);
     }
 }

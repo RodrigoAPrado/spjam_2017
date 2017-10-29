@@ -10,7 +10,7 @@ public class PlayerDamageDeallerController : DamageDeallerController {
         this.type = type;
     }
 
-    public string getType()
+    public string getTypeOfDamage()
     {
         return type;
     }
