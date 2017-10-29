@@ -8,9 +8,9 @@ public class GameStarter : MonoBehaviour {
 
     void Start () {
 
-        PlayerPrefs.SetInt("Score", debugScore);
+        //PlayerPrefs.SetInt("Score", debugScore);
 
-        PlayerPrefs.SetInt("hasSaveFile", 1);
+        //PlayerPrefs.SetInt("hasSaveFile", 1);
         SceneManager.LoadScene("TitleScreen");
 	}
 }

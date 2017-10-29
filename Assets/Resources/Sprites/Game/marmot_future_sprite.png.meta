@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 85dd748e2b9f5ee45974c54e068c603e
-timeCreated: 1509260181
+guid: 3cd21e9fffb899b48b86274ded3ea8b7
+timeCreated: 1509261356
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: terminatorrinco_sprite_0
-    21300002: terminatorrinco_sprite_1
-    21300004: terminatorrinco_sprite_2
-    21300006: terminatorrinco_sprite_3
-    21300008: terminatorrinco_sprite_4
-    21300010: terminatorrinco_sprite_5
-    21300012: terminatorrinco_sprite_6
+    21300000: marmot_future_sprite_0
+    21300002: marmot_future_sprite_1
+    21300004: marmot_future_sprite_2
+    21300006: marmot_future_sprite_3
+    21300008: marmot_future_sprite_4
+    21300010: marmot_future_sprite_5
+    21300012: marmot_future_sprite_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,7 +59,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: terminatorrinco_sprite_0
+      name: marmot_future_sprite_0
       rect:
         serializedVersion: 2
         x: 0
@@ -72,7 +72,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_1
+      name: marmot_future_sprite_1
       rect:
         serializedVersion: 2
         x: 144
@@ -85,7 +85,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_2
+      name: marmot_future_sprite_2
       rect:
         serializedVersion: 2
         x: 288
@@ -98,7 +98,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_3
+      name: marmot_future_sprite_3
       rect:
         serializedVersion: 2
         x: 432
@@ -111,7 +111,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_4
+      name: marmot_future_sprite_4
       rect:
         serializedVersion: 2
         x: 576
@@ -124,7 +124,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_5
+      name: marmot_future_sprite_5
       rect:
         serializedVersion: 2
         x: 720
@@ -137,7 +137,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: terminatorrinco_sprite_6
+      name: marmot_future_sprite_6
       rect:
         serializedVersion: 2
         x: 864

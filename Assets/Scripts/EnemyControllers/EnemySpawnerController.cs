@@ -42,7 +42,7 @@ public class EnemySpawnerController : MonoBehaviour {
         enemiesInTopLane = 10;
         enemiesInMidLane = 10;
         enemiesInBotLane = 10;
-        spawnTimer = 0;
+        spawnTimer = spawnTimerMax;
         laneController = GameObject.FindGameObjectWithTag("LaneController").GetComponent<LaneController>();
         scoreController = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>();
         presentWorld = GameObject.FindGameObjectWithTag("PresentWorld");
@@ -51,13 +51,44 @@ public class EnemySpawnerController : MonoBehaviour {
 
     void Update()
     {
-        
+        if(spawnTimer <= 0)
+        {
+            controlSummon();
+            checkSpawnTimerMax();
+            spawnTimer = spawnTimerMax;
+        }
+        else
+        {
+            controlSpawnTimer();
+        }
+    }
+
+    private void controlSummon()
+    {
         string world = getSummonWorld();
         string dimension = getSummonEnemyDimension();
         //getSummonEnemyType();
         int location = getSummonLocation();
 
         summonAnEnemy(world, dimension, location);
+    }
+
+    private void checkSpawnTimerMax()
+    {
+        if(scoreController.getScore() == scoreCheck)
+        {
+            spawnTimerMax = spawnTimerMax / 2;
+            scoreCheck = scoreCheck * (scoreCheck/2);
+        }
+    }
+
+    private void controlSpawnTimer()
+    {
+        spawnTimer -= Time.deltaTime;
+        if(spawnTimer <= 0)
+        {
+            spawnTimer = 0;
+        }
     }
 
     private string getSummonWorld()
@@ -187,7 +218,9 @@ public class EnemySpawnerController : MonoBehaviour {
 
         GameObject enemy = GameObject.Instantiate(enemyRoster[0], spawnPosition, enemyRoster[0].transform.rotation) as GameObject;
 
-        //worldToSummon.transform.GetChild()
+        enemy.GetComponent<EnemyBaseController>().setLane(location);
+
+        enemy.transform.SetParent(worldToSummon.transform.GetChild(1).transform);
     }
 
     public int getTotalEnemies()

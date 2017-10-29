@@ -16,12 +16,16 @@ public class CharacterShootController : MonoBehaviour {
 
     protected float maxDelay;
 
-    protected virtual void shoot()
+    protected virtual GameObject shoot(GameObject bullet = null)
     {
+        if (bullet == null)
+            bullet = this.bullet;
         GameObject b = GameObject.Instantiate(bullet, 
                                             blastSpawner.position, 
                                             bullet.transform.rotation) as GameObject;
 
         b.GetComponent<BulletController>().setSpeed(bulletSpeed);
+
+        return b;
     }
 }

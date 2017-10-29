@@ -67,6 +67,7 @@ public class CharacterDamageController : MonoBehaviour {
         {
             damageCooldown = startDamageCooldown;
             healthPoints = takeDamage(enemyHit.gameObject);
+
         }
         if (healthPoints <= 0)
             return true;
@@ -79,6 +80,10 @@ public class CharacterDamageController : MonoBehaviour {
     {
         PlayerDamageDeallerController damage = enemy.GetComponent<PlayerDamageDeallerController>();
 
+        BulletController bullet = enemy.GetComponent<BulletController>();
+
+        if (bullet != null)
+            bullet.effect(this.gameObject);
 
         SelfDestructOnContact selfDestruct = enemy.GetComponent<SelfDestructOnContact>();
 

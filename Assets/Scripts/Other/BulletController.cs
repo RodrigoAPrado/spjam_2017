@@ -19,4 +19,9 @@ public class BulletController : MonoBehaviour {
     {
         this.speed = speed;
     }
+
+    public virtual void effect(GameObject target)
+    {
+
+    }
 }

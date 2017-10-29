@@ -24,9 +24,16 @@ public class PlayerShootController : CharacterShootController {
 
     private float cooldownOverheat = 0;
 
+    [SerializeField]
+    private GameObject warpBullet;
+
+    private bool shotWarp;
+
 
     void Start()
     {
+
+
         bulletSpeed = 0.7f;
 
         if (type != "future" && type != "present")
@@ -46,11 +53,26 @@ public class PlayerShootController : CharacterShootController {
         /*Debug.Log("D: "+delay.ToString("F2") + "/" + maxDelay +
               " | OH: " + overheat.ToString("F2") + "/" + explodeOverheat + 
               " | CD: " + cooldownOverheat.ToString("F2") + "/" + startCooldownOverheat);*/
+        if(playerStateController.getCurrentState() == PlayerStateController.StateMachine.warp ||
+            playerStateController.getCurrentState() == PlayerStateController.StateMachine.jumpAndWarp)
+        {
+            if (!shotWarp)
+            {
+                shotWarp = true;
+                GameObject b = shoot(warpBullet);
+
+                b.GetComponent<BulletWarp>().setDimensionType(type);
+            }
+        }
+        else
+        {
+            shotWarp = false;
+        }
         if (playerStateController.getCurrentState() == PlayerStateController.StateMachine.shooting ||
             playerStateController.getCurrentState() == PlayerStateController.StateMachine.jumpAndShooting)
         {
             if(delay <= 0 && cooldownOverheat <= 0) { 
-                shoot();
+                shoot(bullet);
                 overheat += maxDelay;
                 if(overheat >= explodeOverheat)
                 {
@@ -73,8 +95,11 @@ public class PlayerShootController : CharacterShootController {
 
     }
 
-    protected override void shoot()
+    protected override GameObject shoot(GameObject bullet = null)
     {
+        if (bullet == null)
+            bullet = this.bullet;
+
         GameObject b = GameObject.Instantiate(bullet,
                                             blastSpawner.position,
                                             bullet.transform.rotation) as GameObject;
@@ -82,6 +107,8 @@ public class PlayerShootController : CharacterShootController {
         b.GetComponent<BulletController>().setSpeed(bulletSpeed);
 
         b.GetComponent<PlayerDamageDeallerController>().setType(type);
+
+        return b;
     }
 
     private void setDelay()

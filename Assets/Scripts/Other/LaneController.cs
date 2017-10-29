@@ -14,7 +14,6 @@ public class LaneController : MonoBehaviour
 
     public float getLanePositionStart(int i)
     {
-        Debug.Log(i);
         return lanePositionStart[i];
     }
 

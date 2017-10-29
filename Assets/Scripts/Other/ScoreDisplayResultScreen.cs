@@ -11,6 +11,8 @@ public class ScoreDisplayResultScreen : ScoreDisplay {
     // Use this for initialization
     void Start ()
     {
+        PlayerPrefs.SetInt("hasSaveFile", 1);
+
         setScore(whiteScore);
         setScore(blackScore);
 
