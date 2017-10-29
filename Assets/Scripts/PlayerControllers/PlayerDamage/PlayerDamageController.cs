@@ -12,6 +12,7 @@ public class PlayerDamageController : CharacterDamageController {
 
     // Use this for initialization
     void Start () {
+        startDamageCooldown = 1.5f;
         damageCooldown = 0;
         characterHealthController = gameObject.GetComponent<PlayerHealthController>();
         characterDamageSpriteController = gameObject.GetComponent<PlayerSpriteDamageController>();

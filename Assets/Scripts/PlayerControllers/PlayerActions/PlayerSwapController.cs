@@ -8,10 +8,23 @@ public class PlayerSwapController : PlayerActionController
 
     private int lastLaneValue;
 
+    private float baseActionTimerEnd = 0.8f;
+
+    private float limitActionTimerEnd = 0.2f;
+
+    [SerializeField]
+    private string character;
+
     void Start()
     {
+        if(character != "future" && character != "present")
+        {
+            throw new System.Exception("Invalid character. Character must be either future or present");
+        }
+
         playerLaneController = gameObject.GetComponent<PlayerLaneController>();
-        actionTimerEnd = 1;
+
+        setActionTimerEnd();
     }
 
     void Update()
@@ -47,5 +60,25 @@ public class PlayerSwapController : PlayerActionController
     private void changePlayerLane()
     {
         playerLaneController.switchLane(lastLaneValue);
+    }
+
+    private void setActionTimerEnd()
+    {
+        if (PlayerPrefs.HasKey(character + "_lane"))
+        {
+            actionTimerEnd = baseActionTimerEnd - 0.2f * PlayerPrefs.GetInt(character + "_lane");
+        }
+        else
+        {
+            actionTimerEnd = baseActionTimerEnd;
+            PlayerPrefs.SetInt(character + "_lane", 0);
+        }
+    }
+
+    public void upgradeSwapSpeed()
+    {
+        actionTimerEnd -= 0.2f;
+        if (actionTimerEnd < limitActionTimerEnd)
+            actionTimerEnd = limitActionTimerEnd;
     }
 }
